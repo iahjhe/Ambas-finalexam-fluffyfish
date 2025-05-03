@@ -43,7 +43,6 @@ gameContainer.appendChild(networkStatus);
 // Create controls help element
 const controlsHelp = document.createElement('div');
 controlsHelp.id = 'controls-help';
-controlsHelp.innerHTML = 'SPACE/↑/CLICK to jump | ESC: Menu | R: Restart | M: Mute';
 gameContainer.appendChild(controlsHelp);
 
 // Initialize game
@@ -441,8 +440,9 @@ returnToMenuBtn.addEventListener('click', showStartScreen);
 gameContainer.addEventListener('click', flap);
 gameContainer.addEventListener('touchstart', (e) => {
     e.preventDefault();
+    e.stopPropagation();
     flap();
-});
+}, { passive: false });
 
 // Network status events
 window.addEventListener('online', updateNetworkStatus);
