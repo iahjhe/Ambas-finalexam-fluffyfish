@@ -1,17 +1,17 @@
 const CACHE_NAME = 'flappy-fish-v1';
 const ASSETS_TO_CACHE = [
-    '/',
-    '/index.html',
-    '/game.js',
-    '/pwa.js',
-    '/sounds/background.mp3',
-    '/sounds/flap.mp3',
-    '/sounds/hit.mp3',
-    '/sounds/score.mp3',
-    '/assets/images/fish.png',
-    '/assets/images/background.png',
-    '/manifest.json'
-  ];
+  '/',
+  '/index.html',
+  '/app.js',
+  '/sw.js',
+  '/manifest.json',
+  '/fish.png',
+  '/background.png',
+  '/flap.mp3',
+  '/hit.mp3',
+  '/score.mp3',
+  '/bg-music.mp3'
+];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -26,9 +26,34 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
-        return response || fetch(event.request);
+        // Cache hit - return response
+        if (response) {
+          return response;
+        }
+        
+        // Clone the request
+        const fetchRequest = event.request.clone();
+        
+        return fetch(fetchRequest).then(
+          (response) => {
+            // Check if we received a valid response
+            if(!response || response.status !== 200 || response.type !== 'basic') {
+              return response;
+            }
+            
+            // Clone the response
+            const responseToCache = response.clone();
+            
+            caches.open(CACHE_NAME)
+              .then((cache) => {
+                cache.put(event.request, responseToCache);
+              });
+            
+            return response;
+          }
+        );
       })
-  );
+    );
 });
 
 self.addEventListener('activate', (event) => {
@@ -45,23 +70,3 @@ self.addEventListener('activate', (event) => {
     })
   );
 });
-
-// Add this to your fetch event listener
-self.addEventListener('fetch', (e) => {
-    e.respondWith(
-      caches.match(e.request)
-        .then(response => {
-          // Return cached response if found
-          if (response) return response;
-          
-          // Try network request
-          return fetch(e.request)
-            .catch(() => {
-              // If both cache and network fail, return a fallback
-              if (e.request.headers.get('accept').includes('text/html')) {
-                return caches.match('/offline.html');
-              }
-            });
-        })
-    );
-  });

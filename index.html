@@ -4,55 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flappy Fish</title>
-    <meta name="description" content="A fun Flappy Fish game with PWA capabilities">
-    <meta name="theme-color" content="#4a89dc">
+    <meta name="description" content="A fun Flappy Fish game">
+    <meta name="theme-color" content="#4a8cff">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
     <style>
-     
+       
     </style>
 </head>
+<div id="status">🟢 Online</div>
 <body>
-    <div id="game-container">
-        <div id="offline-notification">You are offline - game will continue to work</div>
-        <div id="online-notification">You are back online!</div>
-        <button id="sound-toggle">🔊</button>
-        <canvas id="game-canvas"></canvas>
-        
-        <div id="start-screen">
-            <img src="assets/images/fish.gif" alt="Fish" class="fish-animation">
-            <h1>Flappy Fish</h1>
-            <div id="high-score">High Score: 0</div>
-            <p class="instructions">Tap or click to make the fish swim up. Avoid the pipes!</p>
-            <button id="start-btn" class="btn">Start Game</button>
-            <div id="tap-hint">Tap to Start!</div>
+    <div id="game-wrapper">
+        <div id="game-container">
+            <div id="start-screen">
+                <h1>Flappy Fish</h1>
+                <button id="start-button" class="game-button">Start Game</button>
+                <button id="how-to-play-btn" class="game-button">How to Play</button>
+            </div>
+            
+            <div id="fish"></div>
+            <div id="score-display">Score: 0</div>
+            <div id="game-over">
+                <h2>Game Over!</h2>
+                <p id="final-score">Your score: 0</p>
+                <button id="play-again" class="game-button">Play Again</button>
+                <button id="return-to-menu" class="game-button">Main Menu</button>
+            </div>
+            <button id="install-btn">Install App</button>
+            <div id="offline-message">Offline Mode</div>
         </div>
-        
-        <div id="game-over-screen">
-            <h1>Game Over</h1>
-            <div id="final-score">Score: 0</div>
-            <div id="high-score-display">High Score: 0</div>
-            <button id="restart-btn" class="btn">Play Again</button>
-        </div>
-        <div id="status">🟢 Online</div>
-        <div id="score-display">0</div>
     </div>
 
-    <!-- Audio elements -->
-    <audio id="background-music" loop>
-        <source src="assets/sounds/background.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="flap-sound">
-        <source src="assets/sounds/flap.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="hit-sound">
-        <source src="assets/sounds/hit.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="score-sound">
-        <source src="assets/sounds/score.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="flap-sound" src="flap.mp3" preload="auto"></audio>
+    <audio id="hit-sound" src="hit.mp3" preload="auto"></audio>
+    <audio id="score-sound" src="score.mp3" preload="auto"></audio>
+    <audio id="bg-music" src="bg-music.mp3" loop preload="auto"></audio>
 
-    <script src="game.js"></script>
-    <script src="pwa.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
