@@ -29,7 +29,7 @@ Try to get the highest score!
 
 Live Demo
 Play the game online:
-https://iahjhe.github.io/Ambas-finalact2-fluffyfish/
+https://iahjhe.github.io/Ambas-finalexam-fluffyfish/
 
 Installation (PWA)
 Open the game in Chrome or Edge
@@ -73,7 +73,7 @@ Setup Locally
 Clone the repository:
 
 bash
-git clone https://github.com/iahjhe/Ambas-finalact2-fluffyfish.git
+git clone https://github.com/iahjhe/Ambas-finalexam-fluffyfish.git
 Open index.html in a browser
 
 Credits
